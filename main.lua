@@ -74,23 +74,29 @@ end
 
 local function start()
     while true do
-        local cue = tonumber(getvar("selectedexeccue"))
-        while (not haveCueBpmInfo(cue)) and cue > 0 do
-            cue = cue - 1
+        if not selectedSequence() then
             if haveSystemMonitorFeedback then
-                feedback('Research in cue ' .. cue)
+                feedback('No running seq')
             end
-        end
-        if cue == 0 then
-            -- pas de bpm dans la seq
         else
-            cmd('Assign SpecialMaster 3.1 At '.. bpmInfo(cue))
-            if haveSystemMonitorFeedback then
-                feedback('BPM Set')
+            local cue = tonumber(getvar("selectedexeccue"))
+            while (not haveCueBpmInfo(cue)) and cue > 0 do
+                cue = cue - 1
+                if haveSystemMonitorFeedback then
+                    feedback('Research in cue ' .. cue)
+                end
             end
-        end
+            if cue == 0 then
+                -- pas de bpm dans la seq
+            else
+                cmd('Assign SpecialMaster 3.1 At ' .. bpmInfo(cue))
+                if haveSystemMonitorFeedback then
+                    feedback('BPM Set')
+                end
+            end
 
-        sleep(1)
+            sleep(1)
+        end
     end
 end
 
