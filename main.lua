@@ -89,7 +89,7 @@ local function start()
             if cue == 0 then
                 -- pas de bpm dans la seq
             else
-                cmd('Assign SpecialMaster 3.1 At ' .. bpmInfo(cue))
+                cmd('Assign SpecialMaster 3.' .. speedMaster .. ' At ' .. bpmInfo(cue))
                 if haveSystemMonitorFeedback then
                     feedback('BPM Set')
                 end
