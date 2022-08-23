@@ -1,5 +1,5 @@
 -- Par Gauthier GUERISSE
--- Beta 1.0
+-- Version 1.0
 -- Variable :
 local speedMaster = 1
 local haveSystemMonitorFeedback = false
@@ -89,7 +89,7 @@ local function start()
             if cue == 0 then
                 -- pas de bpm dans la seq
             else
-                cmd('Assign SpecialMaster 3.' .. speedMaster .. ' At ' .. bpmInfo(cue))
+                cmd('Assign SpecialMaster 3.1 At ' .. bpmInfo(cue))
                 if haveSystemMonitorFeedback then
                     feedback('BPM Set')
                 end
