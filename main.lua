@@ -1,7 +1,9 @@
 -- Par Gauthier GUERISSE
 -- Version 1.0
 -- Variable :
-local speedMaster = 1
+local speedMaster = 1   -- Si variable = nil, pas de speed master modifié
+local varName = 'songBpm'  -- Si variable = nil, pas de speed master modifié
+
 local haveSystemMonitorFeedback = false
 
 local handle
@@ -89,7 +91,13 @@ local function start()
             if cue == 0 then
                 -- pas de bpm dans la seq
             else
-                cmd('Assign SpecialMaster 3.1 At ' .. bpmInfo(cue))
+
+                if speedMaster then
+                    cmd('Assign SpecialMaster 3.'.. speedMaster ..' At ' .. bpmInfo(cue))
+                end
+                if varName then
+                    setvar(varName, bpmInfo(cue))
+                end
                 if haveSystemMonitorFeedback then
                     feedback('BPM Set')
                 end
